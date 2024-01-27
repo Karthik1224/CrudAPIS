@@ -16,7 +16,9 @@ import jakarta.transaction.Transactional;
 public interface CustomerDetailsDao extends JpaRepository<CustomerDetails, UUID> {
 
 	
-	@Transactional
-	@Modifying
-	void deleteCustomerDetailsByAadharNumber(String aadharNumber);
+//	@Transactional
+//	@Modifying
+//	void deleteCustomerDetailsByAadharNumber(String aadharNumber);
+
+
 }

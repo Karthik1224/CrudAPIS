@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,13 +50,15 @@ public class CustomerDetailsService {
 	
 	public String modifyCustomerDetails(CustomerDetailsModifyReqDto customerDetailsModifyReqDto)
 	{
-		 CustomerDetails customerDetails=isCustomerDetailsExistByAadharNumber(customerDetailsModifyReqDto.getAadharNumber());
-		 if(customerDetails==null)
+		Optional<CustomerDetails> optionalCustomer = customerDetailsDao.findById(customerDetailsModifyReqDto.getId());
+
+		 if(optionalCustomer.isEmpty())
 		 {
 			 return "CustomerDetails does not exist";
 		 }
 		 else
 		 {
+			   CustomerDetails customerDetails = optionalCustomer.get();
 			   customerDetails.setFirstName(customerDetailsModifyReqDto.getFirstName());
 				customerDetails.setLastName(customerDetailsModifyReqDto.getLastName());
 				customerDetails.setDob(customerDetailsModifyReqDto.getDob());
@@ -67,31 +71,19 @@ public class CustomerDetailsService {
 		
 	}
 	
-	private CustomerDetails isCustomerDetailsExistByAadharNumber(String aadharNumber)
+
+	
+	
+	public String deleteCustomerByUUID(UUID id)
 	{
-		List<CustomerDetails> listOfCustomerDetails = customerDetailsDao.findAll();
-		for(CustomerDetails customer :listOfCustomerDetails)
+		if(customerDetailsDao.existsById(id))
 		{
-			if(customer.getAadharNumber().equals(aadharNumber))
-			{
-				return customer;
-			}
+			customerDetailsDao.deleteById(id);
+			return "CustomerDetails deleted Successfully";
 		}
-		return null;
-	}
-	
-	
-	public String deleteCustomerByAadharNumber(String aadharNumber)
-	{
-		 CustomerDetails customerDetails=isCustomerDetailsExistByAadharNumber(aadharNumber);
-		 if(customerDetails==null)
-		 {
-			 return "CustomerDetails does not exist";
-		 }
-		 else {
-		   customerDetailsDao.deleteCustomerDetailsByAadharNumber(aadharNumber);
-		   return "CustomerDetails deleted successfully";
-		 }
+		else {
+			return "CustomerDetails does not exist";
+		}
 		 
 		
 	}

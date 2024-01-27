@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,12 +72,12 @@ public class CustomerDetailsController {
 	        }
 	 }
 	 
-	 @DeleteMapping("/d")
-	 public ResponseEntity<?> deleteCustomerByAadharNumber(@RequestParam String aadharNumber)
+	 @DeleteMapping("/deleteCustomerDetailsByUUID")
+	 public ResponseEntity<?> deleteCustomerByUUID(@RequestParam UUID id)
 	 {
 		 try
 	        {
-			    String response = customerDetailsService.deleteCustomerByAadharNumber(aadharNumber);
+			    String response = customerDetailsService.deleteCustomerByUUID(id);
 	            return new ResponseEntity(response,HttpStatus.OK);
 
 	        }

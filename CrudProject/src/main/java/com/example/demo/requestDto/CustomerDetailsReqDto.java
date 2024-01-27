@@ -6,6 +6,8 @@ import com.example.demo.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 
 public class CustomerDetailsReqDto {
@@ -62,7 +64,7 @@ public class CustomerDetailsReqDto {
 
 	private String lastName;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	private Date dob;
 
 	private String mobileNumber;

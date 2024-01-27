@@ -1,19 +1,28 @@
 package com.example.demo.requestDto;
 
 import java.util.Date;
+import java.util.UUID;
 
 
 import com.example.demo.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class CustomerDetailsModifyReqDto {
-  
-	
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	private UUID id;
 	private String firstName;
 
 	private String lastName;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+
 	private Date dob;
 
 	private String mobileNumber;
